@@ -1,6 +1,6 @@
 from discord.ext import commands
 from replit import db
-
+import os
 bot = commands.Bot(command_prefix = "$")
 termy = {}
 db["terminology"] = {}
@@ -33,4 +33,4 @@ async def get(ctx, query):
 async def on_ready():
 	print("We have logged in as {0.user}".format(bot))
 
-bot.run("ODA1ODAyMDMwODM2MjE5OTA0.YBgLnw.nmRPs3LfhXMxEm3sImcyyUVZBdM")
+bot.run(os.getenv("TOKEN"))
