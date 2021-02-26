@@ -5,21 +5,26 @@ bot = commands.Bot(command_prefix = "$")
 termy = {}
 db["terminology"] = {}
 
-@bot.command()
-async def add(ctx, *,added_termy):
+def append_database(term):
+
+def validate(term):
 	valid = False
-	for s in added_termy:
+	for s in term:
 		if s == ":":
 			valid = True
 			break
 		else:
 			valid = False
-	if valid:
+	return valid
+
+@bot.command()
+async def add(ctx, *,added_termy):
+	if validate(added_termy):
 		termy_buffer = added_termy.split(":")
 		termy_buffer[0] = termy_buffer[0].strip()
 		termy[termy_buffer[0]] = termy_buffer[1]
 		db["terminology"] = termy
-		await ctx.send("Added the Terminology : "+ added_termy[:10]+ "....")
+		await ctx.send("Added the Terminology : "+ added_termy[:15]+ "....")
 	else:
 		await ctx.send("Not a valid Terminology")
 
